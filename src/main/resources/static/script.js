@@ -1,10 +1,12 @@
 // Student Management Frontend Controller (Vanilla JavaScript)
 
 // Dynamic API detection:
-// Works both when served directly by Spring Boot (localhost:8080) OR when opened via Live Server / file://
-const API_BASE = window.location.origin.includes(":8080")
-  ? "/api/students"
-  : "http://localhost:8080/api/students";
+// When served on cloud (Render) or localhost:8080, use relative "/api/students".
+// Only fall back to http://localhost:8080 when opened via file:// or dev Live Server (port 5500).
+const isDevLiveServer = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && window.location.port !== "8080" && window.location.port !== "";
+const API_BASE = isDevLiveServer || window.location.protocol === "file:"
+  ? "http://localhost:8080/api/students"
+  : "/api/students";
 
 // Global In-Memory State
 let studentsList = [];
