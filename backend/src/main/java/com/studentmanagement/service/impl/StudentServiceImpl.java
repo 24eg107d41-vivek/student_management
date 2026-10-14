@@ -1,5 +1,6 @@
 package com.studentmanagement.service.impl;
 
+import com.studentmanagement.exception.ResourceNotFoundException;
 import com.studentmanagement.model.Student;
 import com.studentmanagement.repository.StudentRepository;
 import com.studentmanagement.service.StudentService;
@@ -27,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentById(Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with ID: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Student not found with ID: " + id));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new RuntimeException("Student not found with ID: " + id);
+            throw new ResourceNotFoundException("Student not found with ID: " + id);
         }
         studentRepository.deleteById(id);
     }

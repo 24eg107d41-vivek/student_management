@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: student-management
+    runtime: docker
+    plan: free
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:h2:mem:studentdb;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR
+      - key: SPRING_DATASOURCE_DRIVER
+        value: org.h2.Driver
+      - key: SPRING_DATASOURCE_USERNAME
+        value: sa
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ""
